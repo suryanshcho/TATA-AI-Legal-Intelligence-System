@@ -1,0 +1,87 @@
+tata-ai-legal-document-intelligence-system/
+│
+├── README.md                                   # Project overview, setup, API, deployment, security
+├── REPOSITORY_STRUCTURE.txt                    # This file
+├── .env.example                                # Environment variable template (copy to .env)
+├── .gitignore                                  # Ignores .env, .venv, uploads, *.db, etc.
+├── requirements.txt                            # Python dependencies
+├── run.py                                      # Entry point -> uvicorn backend.main:app (port 8000)
+├── seed_demo.py                                # Optional: ingest + analyze sample contracts
+│
+├── backend/                                    # FastAPI application
+│   ├── __init__.py
+│   ├── main.py                                 # App, auth, account, settings, audit, static hosting
+│   ├── config.py                               # Settings loaded from .env / environment
+│   ├── database.py                             # SQLite schema + reentrant connection context
+│   ├── auth.py                                 # Password hashing + HMAC-signed token helpers
+│   ├── storage.py                              # Upload validation & file storage
+│   ├── audit.py                                # Audit-logging helpers
+│   ├── schemas.py                              # Pydantic request models
+│   └── api/
+│       ├── __init__.py
+│       ├── documents.py                        # Upload / list / get / delete documents
+│       ├── processing.py                       # Start AI pipeline, job status
+│       ├── clauses.py                          # Extracted clauses / risk flags / summary / doc audit
+│       ├── rag.py                              # Knowledge index + retrieval endpoints
+│       ├── review.py                           # Human approval actions (approve/edit/escalate/reject/comment)
+│       └── dashboard.py                        # Operations KPIs
+│
+├── document_pipeline/                          # The processing pipeline stages
+│   ├── __init__.py
+│   ├── pipeline.py                             # Orchestrator (runs a job through all stages)
+│   ├── ocr.py                                  # Text extraction (PDF / DOCX / images / plaintext)
+│   ├── parsing.py                              # Heading / section detection
+│   ├── clause_extraction.py                    # 20+ clause types + missing-clause detection
+│   ├── normalization.py                        # Parties, dates, governing law, amounts, term
+│   └── quality_checks.py                       # Readability / OCR confidence scoring
+│
+├── ai_workflows/                               # The AI layer
+│   ├── __init__.py
+│   ├── llm_client.py                           # Gemini client with graceful offline fallback
+│   ├── offline_engine.py                       # Rule-based risk engine (works without API key)
+│   ├── rag_retrieval.py                        # TF-IDF knowledge index + retrieval
+│   ├── legal_reasoning.py                      # Risk-flag generation (LLM or offline)
+│   ├── summarization.py                        # Contract summary generation
+│   ├── prompt_templates.py                     # Gemini system/user prompts
+│   └── output_schemas.py                       # JSON output schemas
+│
+├── data/                                       # Knowledge assets
+│   ├── README.md                               # How to extend data assets
+│   ├── sample_contracts/
+│   │   ├── vendor_agreement_sample.txt         # High-risk sample (demo)
+│   │   └── master_services_agreement_sample.txt# Medium-risk sample (demo)
+│   ├── clause_library/
+│   │   └── clause_library.json                 # 20 approved clause templates (RAG)
+│   ├── policy_references/
+│   │   └── policy_references.json              # 4 Tata policy references (RAG)
+│   ├── risk_taxonomy.csv                       # 40 risk patterns -> severity/rationale/action
+│   └── sample_review_records.csv               # Example reviewer-decision records
+│
+├── frontend/                                   # Robotic-themed responsive SPA
+│   ├── index.html                              # All 9 views (login + 8 app screens)
+│   ├── css/
+│   │   └── styles.css                          # HUD/cyberpunk theme, fully responsive
+│   ├── js/
+│   │   └── app.js                              # Routing, API calls, polling, rendering
+│   └── assets/                                 # (optional static assets)
+│
+├── docs/                                       # Documentation
+│   ├── architecture.md                         # System architecture + data model
+│   ├── api_documentation.md                    # Every endpoint + examples
+│   ├── security_notes.md                       # Auth, secrets, AI governance, audit
+│   ├── demo_script.md                          # Narrated demo walkthrough
+│   └── screenshots/                            # Drop UI screenshots here (.gitkeep)
+│
+├── deployment/                                 # Deployment runbooks
+│   ├── environment_setup.md                    # Env vars + production hardening
+│   ├── backend_deployment.md                   # Render / Railway / Hugging Face / Colab
+│   └── vercel_notes.md                         # Frontend-on-Vercel options
+│
+├── colab/
+│   └── tata_legal_colab.ipynb                  # Google Colab launcher (ngrok public URL)
+│
+├── tests/
+│   ├── __init__.py
+│   └── test_pipeline.py                        # 5 end-to-end API tests (pytest)
+│
+└── uploads/                                    # Uploaded files (git-ignored, .gitkeep only)

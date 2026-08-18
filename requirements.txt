@@ -1,0 +1,22 @@
+fastapi==0.111.0
+uvicorn[standard]==0.30.1
+pydantic==2.7.4
+python-dotenv==1.0.1
+pymupdf==1.24.9
+python-multipart==0.0.9
+
+# OCR (optional - enable for scanned PDFs / images)
+# pytesseract==0.3.13
+# pillow==10.4.0
+# paddleocr==2.8.0
+# easyocr==1.7.1
+
+# DOCX support (optional)
+# python-docx==1.1.2
+
+# Gemini LLM (optional - offline rule engine works without it)
+google-generativeai==0.7.2
+
+# Test
+pytest==8.2.2
+httpx==0.27.0

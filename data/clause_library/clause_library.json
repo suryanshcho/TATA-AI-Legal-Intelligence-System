@@ -1,0 +1,182 @@
+[
+  {
+    "kind": "clause",
+    "title": "Standard Indemnification Clause",
+    "category": "indemnity",
+    "content": "Each Party shall indemnify, defend and hold harmless the other Party from and against any third-party claims arising out of: (a) the negligence or willful misconduct of the indemnifying Party; (b) breach of confidentiality obligations; and (c) infringement of intellectual property rights by the deliverables. Indemnification shall not apply to claims arising from the negligence of the indemnified Party.",
+    "source": "Tata Group Approved Clause Library v2.1",
+    "approved": 1,
+    "doc_type": "Vendor Agreement"
+  },
+  {
+    "kind": "clause",
+    "title": "Balanced Limitation of Liability",
+    "category": "limitation_of_liability",
+    "content": "Neither Party shall be liable for indirect, incidental, special or consequential damages. Each Party's aggregate liability arising out of or related to this Agreement shall not exceed the total fees paid or payable to the other Party during the twelve (12) months preceding the claim. This limitation shall not apply to breach of confidentiality, indemnification obligations, willful misconduct or fraud.",
+    "source": "Tata Group Approved Clause Library v2.1",
+    "approved": 1,
+    "doc_type": "Vendor Agreement"
+  },
+  {
+    "kind": "clause",
+    "title": "Confidentiality with Perpetual Protection",
+    "category": "confidentiality",
+    "content": "Each Party shall keep confidential all non-public information disclosed by the other Party. Confidentiality obligations shall survive termination of this Agreement for a period of five (5) years, and indefinitely for trade secrets. Confidential information shall only be used for the purposes of this Agreement.",
+    "source": "Tata Group Approved Clause Library v2.1",
+    "approved": 1,
+    "doc_type": "Vendor Agreement"
+  },
+  {
+    "kind": "clause",
+    "title": "Termination for Convenience",
+    "category": "termination",
+    "content": "Either Party may terminate this Agreement for convenience upon thirty (30) days prior written notice. Upon termination, the Party receiving fees for unperformed services shall refund pro-rata amounts. Termination shall not relieve obligations accrued prior to termination.",
+    "source": "Tata Group Approved Clause Library v2.1",
+    "approved": 1,
+    "doc_type": "Vendor Agreement"
+  },
+  {
+    "kind": "clause",
+    "title": "Auto-Renewal with Opt-Out",
+    "category": "renewal",
+    "content": "This Agreement shall automatically renew for successive one (1) year periods unless either Party provides written notice of non-renewal at least ninety (90) days prior to the end of the then-current term. Renewal pricing may not increase by more than 5% without written agreement.",
+    "source": "Tata Group Approved Clause Library v2.1",
+    "approved": 1,
+    "doc_type": "Vendor Agreement"
+  },
+  {
+    "kind": "clause",
+    "title": "Governing Law - India",
+    "category": "governing_law",
+    "content": "This Agreement shall be governed by and construed in accordance with the laws of India. The courts of Mumbai shall have exclusive jurisdiction over any disputes arising under this Agreement, subject to arbitration provisions.",
+    "source": "Tata Group Approved Clause Library v2.1",
+    "approved": 1,
+    "doc_type": "Vendor Agreement"
+  },
+  {
+    "kind": "clause",
+    "title": "Arbitration Seated in India",
+    "category": "dispute_resolution",
+    "content": "Any dispute shall be referred to arbitration in accordance with the Arbitration and Conciliation Act, 1996. The arbitral tribunal shall consist of a sole arbitrator appointed by mutual agreement. Seat and venue of arbitration shall be Mumbai, India. Arbitration proceedings shall be conducted in English.",
+    "source": "Tata Group Approved Clause Library v2.1",
+    "approved": 1,
+    "doc_type": "Vendor Agreement"
+  },
+  {
+    "kind": "clause",
+    "title": "DPDP Compliant Data Processing",
+    "category": "data_protection",
+    "content": "Both Parties shall comply with the Digital Personal Data Protection Act, 2023 and applicable data protection laws. Personal data shall not be transferred outside India except in accordance with applicable law and with the prior written consent of the data principal and the other Party.",
+    "source": "Tata Group Compliance Policy - Data Protection",
+    "approved": 1,
+    "doc_type": "Vendor Agreement"
+  },
+  {
+    "kind": "clause",
+    "title": "Audit Rights (3 Year Window)",
+    "category": "audit_rights",
+    "content": "Each Party shall have the right to audit the other Party's books and records relevant to this Agreement during normal business hours upon fifteen (15) days notice. Audit rights shall extend for three (3) years from the date of the relevant transaction.",
+    "source": "Tata Group Approved Clause Library v2.1",
+    "approved": 1,
+    "doc_type": "Vendor Agreement"
+  },
+  {
+    "kind": "clause",
+    "title": "Force Majeure",
+    "category": "force_majeure",
+    "content": "Neither Party shall be liable for failure to perform due to force majeure events including acts of government, natural disasters, pandemics, cyber attacks or network failures, provided the affected Party provides prompt notice and mitigates the impact. If the event continues for thirty (30) days, either Party may terminate.",
+    "source": "Tata Group Approved Clause Library v2.1",
+    "approved": 1,
+    "doc_type": "Vendor Agreement"
+  },
+  {
+    "kind": "clause",
+    "title": "IP Ownership and Assignment",
+    "category": "ip_rights",
+    "content": "All intellectual property created by the service provider specifically for the customer under this Agreement shall be assigned to the customer upon full payment. The provider retains ownership of its pre-existing background IP and grants the customer a perpetual, royalty-free license to use background IP incorporated in the deliverables.",
+    "source": "Tata Group Approved Clause Library v2.1",
+    "approved": 1,
+    "doc_type": "Service Agreement"
+  },
+  {
+    "kind": "clause",
+    "title": "Service Level Commitments",
+    "category": "service_levels",
+    "content": "The service provider shall maintain availability of 99.9% for core services. Failure to meet service levels shall result in service credits equal to 5% of monthly fees per violation, up to 25% of monthly fees. Repeated failures entitle the customer to terminate.",
+    "source": "Tata Group Vendor Standards",
+    "approved": 1,
+    "doc_type": "Service Agreement"
+  },
+  {
+    "kind": "policy",
+    "title": "Tata Group Vendor Risk Policy",
+    "category": "compliance",
+    "content": "All vendor agreements must include: (1) balanced mutual indemnification; (2) aggregate liability cap aligned to contract value; (3) DPDP-compliant data processing terms; (4) audit rights for a minimum of three years; (5) termination for convenience with notice; (6) force majeure covering cyber and pandemic events; (7) anti-bribery and compliance warranties. High-risk jurisdictions require approval from General Counsel.",
+    "source": "Tata Group Procurement Compliance Manual",
+    "approved": 1,
+    "doc_type": "Vendor Agreement"
+  },
+  {
+    "kind": "policy",
+    "title": "Tata Group AI Use Policy",
+    "category": "compliance",
+    "content": "AI-generated legal analysis is advisory only. Legal professionals must review and approve all outputs before they are treated as final work product. AI outputs must preserve source citations and confidence signals. Sensitive legal data must not be sent to unapproved external model services.",
+    "source": "Tata Group AI Governance Policy v1.0",
+    "approved": 1,
+    "doc_type": "Policy Document"
+  },
+  {
+    "kind": "policy",
+    "title": "Data Protection and Cross-Border Transfer Guidance",
+    "category": "data_protection",
+    "content": "Personal data transfers outside India must comply with the Digital Personal Data Protection Act 2023. Use standard contractual clauses and ensure consent records are maintained. Business units must register data processing activities with the Data Protection Officer.",
+    "source": "Tata Group Compliance Policy - Data Protection",
+    "approved": 1,
+    "doc_type": "Policy Document"
+  },
+  {
+    "kind": "clause",
+    "title": "Non-Compete (Enforceable Scope)",
+    "category": "non_compete",
+    "content": "During the term and for twelve (12) months following termination, the consultant shall not directly compete with the client's core business in India in the same defined service line. This restriction shall not apply to general industry knowledge or unrelated business activities.",
+    "source": "Tata Group HR Legal Guidance",
+    "approved": 1,
+    "doc_type": "Employment Contract"
+  },
+  {
+    "kind": "clause",
+    "title": "Payment Milestone Terms",
+    "category": "payment",
+    "content": "Invoices shall be paid within forty-five (45) days of receipt of a valid invoice. Late payments shall accrue interest at 1.5% per month subject to statutory limits. No full upfront payment shall exceed 25% of contract value.",
+    "source": "Tata Group Approved Clause Library v2.1",
+    "approved": 1,
+    "doc_type": "Vendor Agreement"
+  },
+  {
+    "kind": "clause",
+    "title": "Warranty and Compliance Representation",
+    "category": "warranty",
+    "content": "Each Party represents and warrants that: (a) it has full authority to enter this Agreement; (b) its performance complies with all applicable laws including anti-bribery, sanctions and data protection laws; (c) its deliverables will conform to the statement of work.",
+    "source": "Tata Group Approved Clause Library v2.1",
+    "approved": 1,
+    "doc_type": "Vendor Agreement"
+  },
+  {
+    "kind": "clause",
+    "title": "Mutual Insurance Requirements",
+    "category": "insurance",
+    "content": "The service provider shall maintain commercial general liability insurance of at least INR 5 crore, professional indemnity of at least INR 2 crore, and workers compensation. Certificates of insurance shall be provided on request.",
+    "source": "Tata Group Vendor Standards",
+    "approved": 1,
+    "doc_type": "Vendor Agreement"
+  },
+  {
+    "kind": "clause",
+    "title": "Assignment and Change of Control",
+    "category": "assignment",
+    "content": "Neither Party may assign this Agreement without prior written consent, which shall not be unreasonably withheld. Assignment to affiliates or on merger, acquisition or change of control shall be permitted with notice.",
+    "source": "Tata Group Approved Clause Library v2.1",
+    "approved": 1,
+    "doc_type": "Vendor Agreement"
+  }
+]

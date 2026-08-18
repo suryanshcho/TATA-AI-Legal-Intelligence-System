@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TATA AI Legal Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;600;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/styles.css" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%2300070f'/%3E%3Cpath d='M20 62 L50 30 L80 62 Z' fill='none' stroke='%2300e5ff' stroke-width='6'/%3E%3Ccircle cx='50' cy='30' r='6' fill='%2300ff9d'/%3E%3C/svg%3E" />
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="scanlines"></div>
+  <div class="noise"></div>
+
+  <!-- LOGIN -->
+  <div id="view-login" class="view">
+    <div class="login-wrap">
+      <div class="login-panel">
+        <div class="login-logo">
+          <svg width="64" height="64" viewBox="0 0 100 100"><rect width="100" height="100" rx="18" fill="none" stroke="#00e5ff" stroke-width="2"/><path d="M20 62 L50 30 L80 62 Z" fill="none" stroke="#00e5ff" stroke-width="5"/><circle cx="50" cy="30" r="5" fill="#00ff9d"/></svg>
+        </div>
+        <h1 class="title-glitch">TATA <span>AI</span> LEGAL INTELLIGENCE</h1>
+        <p class="login-sub">SECURE ACCESS TERMINAL // AUTHORIZED PERSONNEL ONLY</p>
+        <form id="login-form" class="form">
+          <label>EMAIL DESIGNATION</label>
+          <input type="email" id="login-email" value="admin@tata.com" required />
+          <label>ACCESS KEY</label>
+          <input type="password" id="login-password" value="tata123" required />
+          <div id="login-error" class="form-error"></div>
+          <button type="submit" class="btn btn-primary btn-block">INITIALIZE SESSION</button>
+        </form>
+        <p class="login-hint">Demo: admin@tata.com / tata123</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- APP SHELL -->
+  <div id="app-shell" class="app hidden">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-mark">
+          <svg width="34" height="34" viewBox="0 0 100 100"><rect width="100" height="100" rx="18" fill="none" stroke="#00e5ff" stroke-width="3"/><path d="M20 62 L50 30 L80 62 Z" fill="none" stroke="#00e5ff" stroke-width="6"/><circle cx="50" cy="30" r="5" fill="#00ff9d"/></svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">TATA<span class="accent">AI</span></span>
+          <span class="brand-sub">LEGAL INTELLIGENCE</span>
+        </div>
+      </div>
+      <nav class="nav">
+        <button class="nav-item active" data-view="dashboard"><span class="nav-ico">◈</span> Dashboard</button>
+        <button class="nav-item" data-view="workspace"><span class="nav-ico">▤</span> Workspace</button>
+        <button class="nav-item" data-view="upload"><span class="nav-ico">⇪</span> Upload Document</button>
+        <button class="nav-item" data-view="processing"><span class="nav-ico">⟳</span> Processing</button>
+        <button class="nav-item" data-view="review"><span class="nav-ico">⚠</span> Review &amp; Risk</button>
+        <button class="nav-item" data-view="audit"><span class="nav-ico">∷</span> Audit History</button>
+        <button class="nav-item" data-view="account"><span class="nav-ico">◎</span> Account</button>
+        <button class="nav-item" data-view="profile"><span class="nav-ico">☰</span> Profile</button>
+        <button class="nav-item" data-view="settings"><span class="nav-ico">⚙</span> Settings</button>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="sys-line"><span class="led green"></span> CORE ONLINE</div>
+        <div class="sys-line"><span class="led" id="ai-mode-led"></span> AI: <span id="ai-mode-text">--</span></div>
+        <button class="btn btn-ghost btn-block" id="logout-btn">◌ END SESSION</button>
+      </div>
+    </aside>
+
+    <div class="main">
+      <header class="topbar">
+        <button class="hamburger" id="hamburger">☰</button>
+        <div class="topbar-title" id="topbar-title">DASHBOARD</div>
+        <div class="topbar-right">
+          <div class="clock" id="clock">--:--:--</div>
+          <div class="user-chip" id="user-chip">--</div>
+        </div>
+      </header>
+
+      <main class="content">
+
+        <!-- DASHBOARD -->
+        <section id="view-dashboard" class="view-panel active">
+          <div class="hero">
+            <div class="hero-text">
+              <h2>AI LEGAL DOCUMENT INTELLIGENCE</h2>
+              <p>Review, analyze and manage legal documents with AI-powered risk intelligence.</p>
+            </div>
+            <button class="btn btn-primary" data-nav="upload">⇪ Upload Document</button>
+          </div>
+
+          <div class="kpi-grid" id="kpi-grid"></div>
+
+          <div class="alert-banner" id="alert-banner">
+            <div class="alert-ico">▲</div>
+            <div class="alert-body">
+              <div class="alert-title" id="alert-title">0 high-risk contracts need review</div>
+              <div class="alert-sub" id="alert-sub">Vendor agreements flagged by AI analysis.</div>
+            </div>
+            <button class="btn btn-alert" data-nav="review">Review now</button>
+          </div>
+
+          <div class="grid-2">
+            <div class="panel">
+              <div class="panel-head">
+                <span>PROCESSING PIPELINE</span>
+                <span class="panel-tag">LIVE</span>
+              </div>
+              <div class="pipe-stats" id="pipe-stats"></div>
+              <div class="pipe-bar" id="pipe-bar"></div>
+            </div>
+            <div class="panel">
+              <div class="panel-head"><span>RISK CATEGORY MATRIX</span></div>
+              <div id="risk-matrix" class="risk-matrix"></div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <span>RECENT DOCUMENTS</span>
+              <button class="btn btn-ghost btn-sm" data-nav="workspace">VIEW ALL ▸</button>
+            </div>
+            <div class="table-wrap"><table class="table" id="recent-table"></table></div>
+          </div>
+        </section>
+
+        <!-- WORKSPACE -->
+        <section id="view-workspace" class="view-panel">
+          <div class="panel">
+            <div class="panel-head"><span>DOCUMENT WORKSPACE</span><span class="panel-tag" id="ws-count">0 RECORDS</span></div>
+            <div class="filters">
+              <input type="text" id="filter-search" class="input" placeholder="Search documents, type, owner..." />
+              <select id="filter-status" class="input">
+                <option value="All">Status: All</option>
+                <option>Completed</option>
+                <option>Processing</option>
+                <option>Under Review</option>
+              </select>
+              <select id="filter-risk" class="input">
+                <option value="All">Risk: All</option>
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+              </select>
+            </div>
+            <div class="table-wrap"><table class="table" id="workspace-table"></table></div>
+          </div>
+        </section>
+
+        <!-- UPLOAD -->
+        <section id="view-upload" class="view-panel">
+          <div class="panel">
+            <div class="panel-head"><span>DOCUMENT INTAKE TERMINAL</span></div>
+            <div class="upload-grid">
+              <div class="dropzone" id="dropzone">
+                <input type="file" id="file-input" hidden />
+                <div class="dz-ico">⇪</div>
+                <div class="dz-title">DRAG &amp; DROP OR <span>BROWSE</span></div>
+                <div class="dz-sub">PDF • DOCX • TXT • MD • PNG • JPG (max 25MB)</div>
+                <div class="dz-file" id="dz-file"></div>
+              </div>
+              <div class="form">
+                <label>DOCUMENT TYPE</label>
+                <select id="up-doc-type" class="input">
+                  <option>Contract</option><option>Vendor Agreement</option>
+                  <option>Master Services Agreement</option><option>NDA</option>
+                  <option>Service Agreement</option><option>Policy Document</option>
+                  <option>Employment Contract</option><option>Regulatory Filing</option>
+                </select>
+                <label>BUSINESS UNIT</label>
+                <input type="text" id="up-bu" class="input" value="Corporate" />
+                <label>COUNTERPARTY</label>
+                <input type="text" id="up-party" class="input" placeholder="Counterparty name" />
+                <label>JURISDICTION</label>
+                <input type="text" id="up-jur" class="input" placeholder="e.g. India" />
+                <label>CONFIDENTIALITY</label>
+                <select id="up-conf" class="input">
+                  <option>Confidential</option><option>Internal</option><option>Restricted</option><option>Public</option>
+                </select>
+                <label>REVIEW PRIORITY</label>
+                <select id="up-prio" class="input">
+                  <option>Normal</option><option>High</option><option>Critical</option><option>Routine</option>
+                </select>
+                <button class="btn btn-primary btn-block" id="upload-btn">⇪ TRANSMIT DOCUMENT</button>
+                <div id="upload-status" class="form-msg"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- PROCESSING -->
+        <section id="view-processing" class="view-panel">
+          <div class="panel">
+            <div class="panel-head"><span>PROCESSING MONITOR</span><span class="panel-tag" id="proc-tag">IDLE</span></div>
+            <div id="proc-queue" class="proc-queue"></div>
+            <div id="proc-detail" class="proc-detail"></div>
+          </div>
+        </section>
+
+        <!-- REVIEW -->
+        <section id="view-review" class="view-panel">
+          <div id="review-doc-select" class="panel"></div>
+          <div id="review-summary" class="panel hidden">
+            <div class="panel-head"><span>AI SUMMARY</span><span class="panel-tag" id="sum-approval">PENDING</span></div>
+            <pre id="sum-content" class="sum-content"></pre>
+            <div class="review-actions" id="review-actions"></div>
+          </div>
+          <div id="review-clauses" class="panel hidden">
+            <div class="panel-head"><span>EXTRACTED CLAUSES</span><span class="panel-tag">OCR→PARSE→EXTRACT</span></div>
+            <div id="clause-list" class="clause-list"></div>
+          </div>
+          <div id="review-risks" class="panel hidden">
+            <div class="panel-head"><span>RISK FLAGS</span><span class="panel-tag">REASONING ENGINE</span></div>
+            <div id="risk-list" class="risk-list"></div>
+          </div>
+        </section>
+
+        <!-- AUDIT -->
+        <section id="view-audit" class="view-panel">
+          <div class="panel">
+            <div class="panel-head"><span>AUDIT HISTORY</span><span class="panel-tag">TRACEABLE</span></div>
+            <div class="table-wrap"><table class="table" id="audit-table"></table></div>
+          </div>
+        </section>
+
+        <!-- ACCOUNT -->
+        <section id="view-account" class="view-panel">
+          <div class="grid-2">
+            <div class="panel">
+              <div class="panel-head"><span>ACCOUNT STATUS</span></div>
+              <div id="account-info" class="kv"></div>
+            </div>
+            <div class="panel">
+              <div class="panel-head"><span>SYSTEM HEALTH</span></div>
+              <div id="health-info" class="kv"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- PROFILE -->
+        <section id="view-profile" class="view-panel">
+          <div class="panel">
+            <div class="panel-head"><span>EDIT PROFILE</span></div>
+            <form id="profile-form" class="form form-max">
+              <label>FULL NAME</label><input type="text" id="pf-name" class="input" />
+              <label>EMAIL</label><input type="email" id="pf-email" class="input" disabled />
+              <label>ROLE</label><input type="text" id="pf-role" class="input" disabled />
+              <label>BUSINESS UNIT</label><input type="text" id="pf-bu" class="input" />
+              <label>NEW ACCESS KEY (leave blank to keep)</label><input type="password" id="pf-pass" class="input" />
+              <button class="btn btn-primary" id="pf-save">SAVE CHANGES</button>
+              <div id="pf-status" class="form-msg"></div>
+            </form>
+          </div>
+        </section>
+
+        <!-- SETTINGS -->
+        <section id="view-settings" class="view-panel">
+          <div class="panel">
+            <div class="panel-head"><span>SYSTEM SETTINGS</span></div>
+            <form id="settings-form" class="form form-max">
+              <label>AI MODE</label>
+              <select id="st-mode" class="input">
+                <option value="auto">Auto (Gemini if key present, else offline engine)</option>
+                <option value="gemini">Gemini API only</option>
+                <option value="offline">Offline Rule Engine (no API key)</option>
+              </select>
+              <label>LLM MODEL</label>
+              <input type="text" id="st-model" class="input" placeholder="gemini-1.5-flash" />
+              <label>AUTO REVIEW ROUTING</label>
+              <select id="st-routing" class="input">
+                <option value="high_risk">Route High/Critical risks to senior counsel</option>
+                <option value="all_risks">Route all risks</option>
+                <option value="none">No auto routing</option>
+              </select>
+              <button class="btn btn-primary" id="st-save">APPLY SETTINGS</button>
+              <div id="st-status" class="form-msg"></div>
+            </form>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <div class="toast-wrap" id="toast-wrap"></div>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

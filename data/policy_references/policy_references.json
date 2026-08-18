@@ -1,0 +1,38 @@
+[
+  {
+    "kind": "policy",
+    "title": "Tata Group Procurement Compliance Manual",
+    "category": "compliance",
+    "content": "Purpose: Standardize vendor onboarding and contract review across Tata Group business units. All vendor agreements must include balanced mutual indemnification, liability caps aligned to contract value, DPDP-compliant data processing terms, audit rights for a minimum of three years, termination for convenience, force majeure covering pandemic and cyber events, and anti-bribery compliance warranties. Agreements with counterparties in high-risk jurisdictions require prior approval from Group General Counsel. Review priority: High for master services agreements and data-heavy vendors.",
+    "source": "Tata Group Procurement Compliance Manual v3.0",
+    "approved": 1,
+    "doc_type": "Policy Document"
+  },
+  {
+    "kind": "policy",
+    "title": "Tata Group Data Protection Policy",
+    "category": "data_protection",
+    "content": "Scope: All processing of personal data within Tata Group. The Digital Personal Data Protection Act 2023 (DPDP Act) governs personal data processing in India. Cross-border transfers require lawful basis, prior consent where applicable, and standard contractual clauses. Business units must notify the Data Protection Officer of breaches within 72 hours. Data minimization and purpose limitation apply to all processing. High-risk categories: health data, employee data, customer financial data, and data of minors.",
+    "source": "Tata Group Compliance Policy - Data Protection v2.0",
+    "approved": 1,
+    "doc_type": "Policy Document"
+  },
+  {
+    "kind": "policy",
+    "title": "Tata Group AI Governance Policy",
+    "category": "compliance",
+    "content": "AI outputs are advisory and must be reviewed and approved by authorized professionals before use as final work product. All AI-generated legal analysis must preserve source citations, confidence signals, and approval state. Sensitive legal or personal data must only be sent to approved model services with data protection commitments. Human accountability is retained for all decisions influenced by AI outputs. Audit logs of model usage and review actions must be retained for governance purposes.",
+    "source": "Tata Group AI Governance Policy v1.0",
+    "approved": 1,
+    "doc_type": "Policy Document"
+  },
+  {
+    "kind": "policy",
+    "title": "Tata Group Risk Flagging Guidance",
+    "category": "risk_management",
+    "content": "Risk flags must include severity, rationale, evidence citation, confidence, and recommended reviewer action. Flags with High or Critical severity route to senior counsel for review before acceptance. Missing clauses are flagged separately from unusual language. Conflicting obligations between clauses must be escalated. A flag is considered open until a reviewer accepts, edits, escalates, or rejects it. All reviewer actions must be recorded in the audit trail with identity and timestamp.",
+    "source": "Tata Group Legal Operations Manual",
+    "approved": 1,
+    "doc_type": "Policy Document"
+  }
+]

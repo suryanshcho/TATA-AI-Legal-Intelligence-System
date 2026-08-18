@@ -1,0 +1,6 @@
+document_id,original_name,doc_type,clause_count,risk_count,high_risk,severity,category,reviewer_action,reviewer_note,reviewed_at
+1,vendor_agreement_sample.txt,Vendor Agreement,16,7,3,High,Unilateral Indemnity,accepted,"Mutual indemnity requested in redline.","2026-03-15 10:22:41"
+1,vendor_agreement_sample.txt,Vendor Agreement,16,7,3,High,Auto-Renewal Trap,escalated,"Sent to senior counsel for negotiation.","2026-03-15 10:24:03"
+1,vendor_agreement_sample.txt,Vendor Agreement,16,7,3,High,Non-Compete Too Broad,rejected,"Non-compete clause unenforceable under Indian law.","2026-03-15 10:25:17"
+2,master_services_agreement_sample.txt,Master Services Agreement,14,4,0,Medium,Restrictive Audit Window,accepted,"Accepted with annotation - audit window noted.","2026-03-16 09:12:50"
+2,master_services_agreement_sample.txt,Master Services Agreement,14,4,0,Medium,Termination Fee,pending,NULL,NULL
