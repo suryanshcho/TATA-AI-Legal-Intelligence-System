@@ -6,7 +6,7 @@
   <title>Tata Group — AI Legal Document Intelligence System</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/static/css/styles.css?v=2.0.2" />
+  <link rel="stylesheet" href="/static/css/styles.css?v=2.0.3" />
 </head>
 <body>
 
@@ -612,6 +612,28 @@
 </div>
 
 <div class="toast-wrap" id="toast-wrap"></div>
-<script src="/static/js/app.js?v=2.0.2"></script>
+
+<!-- ASSISTANT POPUP -->
+<button class="chat-fab" id="chat-fab" aria-label="Open AI assistant">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+  <span class="chat-fab-dot"></span>
+</button>
+<div class="chat-panel hidden" id="chat-panel">
+  <div class="chat-head">
+    <div class="chat-head-w">
+      <div class="chat-avatar">AI</div>
+      <div><div class="chat-title">Legal AI Assistant</div><div class="chat-status">Online &middot; instant answers</div></div>
+    </div>
+    <button class="chat-close" id="chat-close" aria-label="Close">&times;</button>
+  </div>
+  <div class="chat-body" id="chat-body"></div>
+  <div class="chat-chips" id="chat-chips"></div>
+  <form class="chat-input-row" id="chat-form">
+    <input class="chat-input" id="chat-input" placeholder="Ask about the system..." autocomplete="off" />
+    <button class="chat-send" type="submit" aria-label="Send">&#10148;</button>
+  </form>
+</div>
+
+<script src="/static/js/app.js?v=2.0.3"></script>
 </body>
 </html>

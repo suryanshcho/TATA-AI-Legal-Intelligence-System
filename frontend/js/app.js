@@ -561,3 +561,85 @@ $("wf-steps").addEventListener("click", function(e) {
 });
 
 checkSession();
+
+/* ============ ASSISTANT POPUP (lightweight rule-based Q&A) ============ */
+(function initChat() {
+  var fab = $("chat-fab"), panel = $("chat-panel"), body = $("chat-body");
+  var form = $("chat-form"), input = $("chat-input"), chips = $("chat-chips");
+  if (!fab || !panel) return;
+
+  const KB = [
+    { k: ["hi", "hello", "hey", "namaste", "start", "help"], a: "Hello! I'm the Legal AI Assistant. I can explain uploading, supported formats, the processing pipeline, clauses, risks, review & approval, audit, security, AI mode and settings. What would you like to know?" },
+    { k: ["upload", "add document", "submit", "new file", "how to add", "process file"], a: "To upload: open the Upload tab, drag a file onto the drop zone (or click to browse), fill the metadata (type, business unit, counterparty), then click 'Upload & Process'. The guided flow Processing \u2192 Review \u2192 Audit starts automatically." },
+    { k: ["format", "file type", "supported", "pdf", "docx", "extension", "accept"], a: "Supported formats: PDF, DOCX/DOC, TXT, MD, HTML, CSV, JSON and images (PNG, JPG, TIFF, BMP, GIF, WEBP). Maximum file size is 25 MB." },
+    { k: ["process", "pipeline", "stage", "ocr", "how long", "steps", "analysis"], a: "The pipeline runs 8 stages: OCR & text extraction \u2192 parsing \u2192 clause extraction \u2192 RAG retrieval \u2192 legal reasoning \u2192 risk flagging \u2192 summarization \u2192 human review. Live progress shows in the Processing tab." },
+    { k: ["clause", "extract", "section", "provision"], a: "Clauses are extracted using 20 approved patterns (indemnity, liability, termination, confidentiality, payment, governing law, etc.) from the clause library, with page and confidence scores. View them in the Review tab." },
+    { k: ["risk", "flag", "high risk", "danger", "liability"], a: "The reasoning engine flags risks using a 40-rule taxonomy and scores them Critical/High/Medium/Low with rationale, evidence and a recommendation. You can Accept, Escalate or Reject each from the Review tab." },
+    { k: ["review", "approve", "reject", "escalate", "summary", "approval"], a: "In Review you see the AI summary, extracted clauses and risk flags. You can Approve, Edit the summary, Escalate or Reject. Every action is recorded in the audit trail." },
+    { k: ["audit", "history", "trace", "log", "who did"], a: "The Audit tab shows a complete, timestamped trace of every system and reviewer action (actor, action, document, detail) for full traceability and compliance." },
+    { k: ["ai mode", "gemini", "model", "offline", "llm", "api key"], a: "AI mode is set in Settings. In 'Auto' it uses Gemini when an API key is present, otherwise the built-in offline rule engine (40 patterns) \u2014 so it works without any paid API." },
+    { k: ["security", "secure", "confidential", "encrypt", "safe", "privacy"], a: "Security: HMAC-signed token auth, hashed passwords, role-based access, data-access logging and threat detection, plus a full audit trail. A standalone Security & Observability module adds compliance reporting." },
+    { k: ["login", "sign in", "password", "account", "admin"], a: "Sign in with the demo admin account: admin@tata.com / tata123. Use 'Sign Out' (top-right) to end your session." },
+    { k: ["dashboard", "kpi", "overview", "metric", "stat"], a: "The Dashboard shows KPIs (total / completed / processing / high-risk documents), the live processing pipeline, a risk matrix by category, and recent documents." },
+    { k: ["workspace", "search", "filter", "find document", "manage"], a: "The Workspace lists all documents with search and filters by status and risk level. Click any row to open it in Review." },
+    { k: ["export", "download", "report"], a: "You can export a document and its analysis for compliance from the Workspace/Review. Exports are logged in the security data-access trail." },
+    { k: ["delete", "remove"], a: "To delete a document, open the Workspace, click the \u00d7 next to it and confirm. This removes the document and its analysis." },
+    { k: ["contact", "support", "human", "team", "who made"], a: "For further help, contact the Tata Group Legal AI team or your system administrator." },
+    { k: ["thanks", "thank you", "thx", "awesome", "great"], a: "You're welcome! Ask me anything else about the platform." },
+    { k: ["bye", "goodbye", "see you"], a: "Goodbye! I'm here whenever you need help with the Legal AI platform." }
+  ];
+  const QUICK = ["How do I upload?", "Supported formats?", "What risks are detected?", "How does review work?", "Is it secure?"];
+
+  function answer(q) {
+    q = (q || "").toLowerCase();
+    var best = null, bestScore = 0;
+    KB.forEach(function (item) {
+      var score = 0;
+      item.k.forEach(function (k) { if (q.indexOf(k) !== -1) score += k.split(" ").length; });
+      if (score > bestScore) { bestScore = score; best = item; }
+    });
+    return best ? best.a
+      : "I can help with: uploading documents, supported formats, the processing pipeline, clauses, risks, review & approval, the audit trail, security, AI mode and settings. Try asking about one of these.";
+  }
+
+  function addMsg(text, who) {
+    var el = document.createElement("div");
+    el.className = "chat-msg " + who;
+    el.textContent = text;
+    body.appendChild(el);
+    body.scrollTop = body.scrollHeight;
+  }
+  function botSay(text) {
+    var t = document.createElement("div");
+    t.className = "chat-msg bot typing";
+    t.innerHTML = "<span></span><span></span><span></span>";
+    body.appendChild(t); body.scrollTop = body.scrollHeight;
+    setTimeout(function () { t.remove(); addMsg(text, "bot"); }, 420);
+  }
+  function send(q) {
+    q = (q || "").trim();
+    if (!q) return;
+    addMsg(q, "user");
+    input.value = "";
+    botSay(answer(q));
+  }
+
+  chips.innerHTML = QUICK.map(function (q) { return '<button type="button" class="chat-chip" data-q="' + q + '">' + q + "</button>"; }).join("");
+  chips.addEventListener("click", function (e) {
+    var b = e.target.closest(".chat-chip");
+    if (b) send(b.dataset.q);
+  });
+  form.addEventListener("submit", function (e) { e.preventDefault(); send(input.value); });
+
+  function openChat() {
+    panel.classList.remove("hidden"); fab.classList.add("hidden");
+    if (!body.dataset.init) {
+      body.dataset.init = "1";
+      addMsg("Hi! I'm the Legal AI Assistant. Ask me anything about this platform \u2014 uploading, risks, review, audit or security.", "bot");
+    }
+    input.focus();
+  }
+  function closeChat() { panel.classList.add("hidden"); fab.classList.remove("hidden"); }
+  fab.addEventListener("click", openChat);
+  $("chat-close").addEventListener("click", closeChat);
+})();
