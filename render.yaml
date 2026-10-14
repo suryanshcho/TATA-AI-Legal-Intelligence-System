@@ -1,0 +1,39 @@
+services:
+  - type: web
+    name: tata-legal-ai
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    region: singapore
+    branch: main
+    autoDeploy: true
+    healthCheckPath: /api/health
+    envVars:
+      - key: AI_MODE
+        value: offline
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ADMIN_EMAIL
+        value: admin@tata.com
+      - key: ADMIN_PASSWORD
+        value: tata123
+      - key: TOKEN_TTL_HOURS
+        value: "24"
+      - key: CORS_ORIGINS
+        value: "*"
+      - key: DB_PATH
+        value: /data/legal_intelligence.db
+      - key: UPLOAD_DIR
+        value: /data/uploads
+
+# ---------------------------------------------------------------------------
+# OPTIONAL — persistent storage (requires a PAID Render instance, e.g. Starter)
+# Uncomment the block below to keep documents + DB across deploys/restarts.
+# Then change `plan: free` above to `plan: starter`.
+# ---------------------------------------------------------------------------
+#    disk:
+#      name: tata-legal-data
+#      mountPath: /data
+#      sizeGB: 1

@@ -3,7 +3,7 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data"
-UPLOAD_DIR = BASE_DIR / "uploads"
+UPLOAD_DIR = Path(os.getenv("UPLOAD_DIR", str(BASE_DIR / "uploads")))
 KNOWLEDGE_DIR = DATA_DIR / "clause_library"
 POLICY_DIR = DATA_DIR / "policy_references"
 
@@ -57,4 +57,7 @@ class Settings:
 settings = Settings()
 
 for d in (UPLOAD_DIR, KNOWLEDGE_DIR, POLICY_DIR):
-    d.mkdir(parents=True, exist_ok=True)
+    try:
+        d.mkdir(parents=True, exist_ok=True)
+    except OSError:
+        pass
