@@ -3,286 +3,615 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TATA AI Legal Intelligence</title>
+  <title>Tata Group — AI Legal Document Intelligence System</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;600;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/static/css/styles.css" />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%2300070f'/%3E%3Cpath d='M20 62 L50 30 L80 62 Z' fill='none' stroke='%2300e5ff' stroke-width='6'/%3E%3Ccircle cx='50' cy='30' r='6' fill='%2300ff9d'/%3E%3C/svg%3E" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/styles.css?v=2.0.2" />
 </head>
 <body>
-  <div class="bg-grid"></div>
-  <div class="scanlines"></div>
-  <div class="noise"></div>
 
-  <!-- LOGIN -->
-  <div id="view-login" class="view">
-    <div class="login-wrap">
-      <div class="login-panel">
-        <div class="login-logo">
-          <svg width="64" height="64" viewBox="0 0 100 100"><rect width="100" height="100" rx="18" fill="none" stroke="#00e5ff" stroke-width="2"/><path d="M20 62 L50 30 L80 62 Z" fill="none" stroke="#00e5ff" stroke-width="5"/><circle cx="50" cy="30" r="5" fill="#00ff9d"/></svg>
-        </div>
-        <h1 class="title-glitch">TATA <span>AI</span> LEGAL INTELLIGENCE</h1>
-        <p class="login-sub">SECURE ACCESS TERMINAL // AUTHORIZED PERSONNEL ONLY</p>
-        <form id="login-form" class="form">
-          <label>EMAIL DESIGNATION</label>
-          <input type="email" id="login-email" value="admin@tata.com" required />
-          <label>ACCESS KEY</label>
-          <input type="password" id="login-password" value="tata123" required />
-          <div id="login-error" class="form-error"></div>
-          <button type="submit" class="btn btn-primary btn-block">INITIALIZE SESSION</button>
-        </form>
-        <p class="login-hint">Demo: admin@tata.com / tata123</p>
+<!-- ============ LANDING PAGE ============ -->
+<div id="landing-page">
+
+  <!-- UTILITY BAR -->
+  <div class="util-bar">
+    <div class="container util-inner">
+      <div class="util-left">
+        <span class="util-region">&#9670; India</span>
+        <span class="util-sep">|</span>
+        <a href="#" class="util-link">Investors</a>
+        <span class="util-sep">|</span>
+        <a href="#" class="util-link">Careers</a>
+        <span class="util-sep">|</span>
+        <a href="#" class="util-link">Media</a>
+      </div>
+      <div class="util-right">
+        <a href="#" class="util-link">Accessibility</a>
+        <span class="util-sep">|</span>
+        <a href="#login-section" class="util-link util-highlight">Portal Login</a>
       </div>
     </div>
   </div>
 
-  <!-- APP SHELL -->
-  <div id="app-shell" class="app hidden">
-    <aside class="sidebar" id="sidebar">
-      <div class="brand">
-        <div class="brand-mark">
-          <svg width="34" height="34" viewBox="0 0 100 100"><rect width="100" height="100" rx="18" fill="none" stroke="#00e5ff" stroke-width="3"/><path d="M20 62 L50 30 L80 62 Z" fill="none" stroke="#00e5ff" stroke-width="6"/><circle cx="50" cy="30" r="5" fill="#00ff9d"/></svg>
+  <!-- STICKY HEADER -->
+  <header class="site-header" id="site-header">
+    <div class="container header-row">
+      <a href="#" class="brand" id="brand-home">
+        <div class="brand-logo">
+          <svg width="42" height="42" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="46" fill="none" stroke="#0066CC" stroke-width="2"/>
+            <circle cx="50" cy="50" r="38" fill="none" stroke="#0066CC" stroke-width="1" opacity=".4"/>
+            <text x="50" y="40" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="14" font-weight="800" fill="#0066CC">TATA</text>
+            <text x="50" y="56" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="7" fill="#64748B" font-weight="500">GROUP</text>
+            <text x="50" y="68" text-anchor="middle" font-family="Inter,sans-serif" font-size="5" fill="#475569" font-weight="500">LEGAL AI</text>
+          </svg>
         </div>
         <div class="brand-text">
-          <span class="brand-name">TATA<span class="accent">AI</span></span>
-          <span class="brand-sub">LEGAL INTELLIGENCE</span>
+          <span class="brand-name">Tata Group</span>
+          <span class="brand-sub">AI Legal Document Intelligence</span>
         </div>
-      </div>
-      <nav class="nav">
-        <button class="nav-item active" data-view="dashboard"><span class="nav-ico">◈</span> Dashboard</button>
-        <button class="nav-item" data-view="workspace"><span class="nav-ico">▤</span> Workspace</button>
-        <button class="nav-item" data-view="upload"><span class="nav-ico">⇪</span> Upload Document</button>
-        <button class="nav-item" data-view="processing"><span class="nav-ico">⟳</span> Processing</button>
-        <button class="nav-item" data-view="review"><span class="nav-ico">⚠</span> Review &amp; Risk</button>
-        <button class="nav-item" data-view="audit"><span class="nav-ico">∷</span> Audit History</button>
-        <button class="nav-item" data-view="account"><span class="nav-ico">◎</span> Account</button>
-        <button class="nav-item" data-view="profile"><span class="nav-ico">☰</span> Profile</button>
-        <button class="nav-item" data-view="settings"><span class="nav-ico">⚙</span> Settings</button>
+      </a>
+
+      <nav class="main-nav" id="main-nav">
+        <a href="#entities" class="nav-link">Businesses</a>
+        <a href="#innovation" class="nav-link">Innovation &amp; Tech</a>
+        <a href="#sustainability" class="nav-link">Sustainability</a>
+        <a href="#impact" class="nav-link">Impact</a>
+        <a href="#about" class="nav-link">About Us</a>
       </nav>
-      <div class="sidebar-footer">
-        <div class="sys-line"><span class="led green"></span> CORE ONLINE</div>
-        <div class="sys-line"><span class="led" id="ai-mode-led"></span> AI: <span id="ai-mode-text">--</span></div>
-        <button class="btn btn-ghost btn-block" id="logout-btn">◌ END SESSION</button>
+
+      <div class="header-actions">
+        <button class="icon-btn" id="search-trigger" aria-label="Search">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        </button>
+        <a href="#login-section" class="btn btn-accent btn-sm header-cta">Access Portal</a>
+        <button class="hamburger" id="hamburger-btn" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
       </div>
-    </aside>
-
-    <div class="main">
-      <header class="topbar">
-        <button class="hamburger" id="hamburger">☰</button>
-        <div class="topbar-title" id="topbar-title">DASHBOARD</div>
-        <div class="topbar-right">
-          <div class="clock" id="clock">--:--:--</div>
-          <div class="user-chip" id="user-chip">--</div>
-        </div>
-      </header>
-
-      <main class="content">
-
-        <!-- DASHBOARD -->
-        <section id="view-dashboard" class="view-panel active">
-          <div class="hero">
-            <div class="hero-text">
-              <h2>AI LEGAL DOCUMENT INTELLIGENCE</h2>
-              <p>Review, analyze and manage legal documents with AI-powered risk intelligence.</p>
-            </div>
-            <button class="btn btn-primary" data-nav="upload">⇪ Upload Document</button>
-          </div>
-
-          <div class="kpi-grid" id="kpi-grid"></div>
-
-          <div class="alert-banner" id="alert-banner">
-            <div class="alert-ico">▲</div>
-            <div class="alert-body">
-              <div class="alert-title" id="alert-title">0 high-risk contracts need review</div>
-              <div class="alert-sub" id="alert-sub">Vendor agreements flagged by AI analysis.</div>
-            </div>
-            <button class="btn btn-alert" data-nav="review">Review now</button>
-          </div>
-
-          <div class="grid-2">
-            <div class="panel">
-              <div class="panel-head">
-                <span>PROCESSING PIPELINE</span>
-                <span class="panel-tag">LIVE</span>
-              </div>
-              <div class="pipe-stats" id="pipe-stats"></div>
-              <div class="pipe-bar" id="pipe-bar"></div>
-            </div>
-            <div class="panel">
-              <div class="panel-head"><span>RISK CATEGORY MATRIX</span></div>
-              <div id="risk-matrix" class="risk-matrix"></div>
-            </div>
-          </div>
-
-          <div class="panel">
-            <div class="panel-head">
-              <span>RECENT DOCUMENTS</span>
-              <button class="btn btn-ghost btn-sm" data-nav="workspace">VIEW ALL ▸</button>
-            </div>
-            <div class="table-wrap"><table class="table" id="recent-table"></table></div>
-          </div>
-        </section>
-
-        <!-- WORKSPACE -->
-        <section id="view-workspace" class="view-panel">
-          <div class="panel">
-            <div class="panel-head"><span>DOCUMENT WORKSPACE</span><span class="panel-tag" id="ws-count">0 RECORDS</span></div>
-            <div class="filters">
-              <input type="text" id="filter-search" class="input" placeholder="Search documents, type, owner..." />
-              <select id="filter-status" class="input">
-                <option value="All">Status: All</option>
-                <option>Completed</option>
-                <option>Processing</option>
-                <option>Under Review</option>
-              </select>
-              <select id="filter-risk" class="input">
-                <option value="All">Risk: All</option>
-                <option value="High">High</option>
-                <option value="Medium">Medium</option>
-                <option value="Low">Low</option>
-              </select>
-            </div>
-            <div class="table-wrap"><table class="table" id="workspace-table"></table></div>
-          </div>
-        </section>
-
-        <!-- UPLOAD -->
-        <section id="view-upload" class="view-panel">
-          <div class="panel">
-            <div class="panel-head"><span>DOCUMENT INTAKE TERMINAL</span></div>
-            <div class="upload-grid">
-              <div class="dropzone" id="dropzone">
-                <input type="file" id="file-input" hidden />
-                <div class="dz-ico">⇪</div>
-                <div class="dz-title">DRAG &amp; DROP OR <span>BROWSE</span></div>
-                <div class="dz-sub">PDF • DOCX • TXT • MD • PNG • JPG (max 25MB)</div>
-                <div class="dz-file" id="dz-file"></div>
-              </div>
-              <div class="form">
-                <label>DOCUMENT TYPE</label>
-                <select id="up-doc-type" class="input">
-                  <option>Contract</option><option>Vendor Agreement</option>
-                  <option>Master Services Agreement</option><option>NDA</option>
-                  <option>Service Agreement</option><option>Policy Document</option>
-                  <option>Employment Contract</option><option>Regulatory Filing</option>
-                </select>
-                <label>BUSINESS UNIT</label>
-                <input type="text" id="up-bu" class="input" value="Corporate" />
-                <label>COUNTERPARTY</label>
-                <input type="text" id="up-party" class="input" placeholder="Counterparty name" />
-                <label>JURISDICTION</label>
-                <input type="text" id="up-jur" class="input" placeholder="e.g. India" />
-                <label>CONFIDENTIALITY</label>
-                <select id="up-conf" class="input">
-                  <option>Confidential</option><option>Internal</option><option>Restricted</option><option>Public</option>
-                </select>
-                <label>REVIEW PRIORITY</label>
-                <select id="up-prio" class="input">
-                  <option>Normal</option><option>High</option><option>Critical</option><option>Routine</option>
-                </select>
-                <button class="btn btn-primary btn-block" id="upload-btn">⇪ TRANSMIT DOCUMENT</button>
-                <div id="upload-status" class="form-msg"></div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- PROCESSING -->
-        <section id="view-processing" class="view-panel">
-          <div class="panel">
-            <div class="panel-head"><span>PROCESSING MONITOR</span><span class="panel-tag" id="proc-tag">IDLE</span></div>
-            <div id="proc-queue" class="proc-queue"></div>
-            <div id="proc-detail" class="proc-detail"></div>
-          </div>
-        </section>
-
-        <!-- REVIEW -->
-        <section id="view-review" class="view-panel">
-          <div id="review-doc-select" class="panel"></div>
-          <div id="review-summary" class="panel hidden">
-            <div class="panel-head"><span>AI SUMMARY</span><span class="panel-tag" id="sum-approval">PENDING</span></div>
-            <pre id="sum-content" class="sum-content"></pre>
-            <div class="review-actions" id="review-actions"></div>
-          </div>
-          <div id="review-clauses" class="panel hidden">
-            <div class="panel-head"><span>EXTRACTED CLAUSES</span><span class="panel-tag">OCR→PARSE→EXTRACT</span></div>
-            <div id="clause-list" class="clause-list"></div>
-          </div>
-          <div id="review-risks" class="panel hidden">
-            <div class="panel-head"><span>RISK FLAGS</span><span class="panel-tag">REASONING ENGINE</span></div>
-            <div id="risk-list" class="risk-list"></div>
-          </div>
-        </section>
-
-        <!-- AUDIT -->
-        <section id="view-audit" class="view-panel">
-          <div class="panel">
-            <div class="panel-head"><span>AUDIT HISTORY</span><span class="panel-tag">TRACEABLE</span></div>
-            <div class="table-wrap"><table class="table" id="audit-table"></table></div>
-          </div>
-        </section>
-
-        <!-- ACCOUNT -->
-        <section id="view-account" class="view-panel">
-          <div class="grid-2">
-            <div class="panel">
-              <div class="panel-head"><span>ACCOUNT STATUS</span></div>
-              <div id="account-info" class="kv"></div>
-            </div>
-            <div class="panel">
-              <div class="panel-head"><span>SYSTEM HEALTH</span></div>
-              <div id="health-info" class="kv"></div>
-            </div>
-          </div>
-        </section>
-
-        <!-- PROFILE -->
-        <section id="view-profile" class="view-panel">
-          <div class="panel">
-            <div class="panel-head"><span>EDIT PROFILE</span></div>
-            <form id="profile-form" class="form form-max">
-              <label>FULL NAME</label><input type="text" id="pf-name" class="input" />
-              <label>EMAIL</label><input type="email" id="pf-email" class="input" disabled />
-              <label>ROLE</label><input type="text" id="pf-role" class="input" disabled />
-              <label>BUSINESS UNIT</label><input type="text" id="pf-bu" class="input" />
-              <label>NEW ACCESS KEY (leave blank to keep)</label><input type="password" id="pf-pass" class="input" />
-              <button class="btn btn-primary" id="pf-save">SAVE CHANGES</button>
-              <div id="pf-status" class="form-msg"></div>
-            </form>
-          </div>
-        </section>
-
-        <!-- SETTINGS -->
-        <section id="view-settings" class="view-panel">
-          <div class="panel">
-            <div class="panel-head"><span>SYSTEM SETTINGS</span></div>
-            <form id="settings-form" class="form form-max">
-              <label>AI MODE</label>
-              <select id="st-mode" class="input">
-                <option value="auto">Auto (Gemini if key present, else offline engine)</option>
-                <option value="gemini">Gemini API only</option>
-                <option value="offline">Offline Rule Engine (no API key)</option>
-              </select>
-              <label>LLM MODEL</label>
-              <input type="text" id="st-model" class="input" placeholder="gemini-1.5-flash" />
-              <label>AUTO REVIEW ROUTING</label>
-              <select id="st-routing" class="input">
-                <option value="high_risk">Route High/Critical risks to senior counsel</option>
-                <option value="all_risks">Route all risks</option>
-                <option value="none">No auto routing</option>
-              </select>
-              <button class="btn btn-primary" id="st-save">APPLY SETTINGS</button>
-              <div id="st-status" class="form-msg"></div>
-            </form>
-          </div>
-        </section>
-
-      </main>
     </div>
-  </div>
 
-  <div class="toast-wrap" id="toast-wrap"></div>
+    <!-- MOBILE DRAWER -->
+    <div class="mobile-drawer" id="mobile-drawer">
+      <div class="drawer-overlay" id="drawer-overlay"></div>
+      <div class="drawer-panel">
+        <div class="drawer-head">
+          <span class="brand-name">Tata Group</span>
+          <button class="drawer-close" id="drawer-close">&times;</button>
+        </div>
+        <nav class="drawer-nav">
+          <a href="#entities" class="drawer-link">Businesses</a>
+          <a href="#innovation" class="drawer-link">Innovation &amp; Tech</a>
+          <a href="#sustainability" class="drawer-link">Sustainability</a>
+          <a href="#impact" class="drawer-link">Impact</a>
+          <a href="#about" class="drawer-link">About Us</a>
+          <hr class="drawer-divider" />
+          <a href="#login-section" class="drawer-link drawer-accent">Portal Login</a>
+        </nav>
+      </div>
+    </div>
+  </header>
 
-  <script src="/static/js/app.js"></script>
+  <!-- HERO SECTION -->
+  <section class="hero" id="hero">
+    <div class="hero-slides" id="hero-slides">
+      <div class="hero-slide active" data-slide="0">
+        <div class="hero-bg" style="background: linear-gradient(135deg, #0B1320 0%, #0F172A 40%, #1E3A5F 100%);"></div>
+      </div>
+      <div class="hero-slide" data-slide="1">
+        <div class="hero-bg" style="background: linear-gradient(135deg, #0F172A 0%, #0B2545 50%, #132D5E 100%);"></div>
+      </div>
+      <div class="hero-slide" data-slide="2">
+        <div class="hero-bg" style="background: linear-gradient(135deg, #0A1628 0%, #0B1320 60%, #0066CC22 100%);"></div>
+      </div>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="container">
+        <div class="hero-badge">AI-Powered Document Intelligence</div>
+        <h1 class="hero-title">
+          <span class="hero-line">Engineered for</span>
+          <span class="hero-line hero-accent">Legal Evolution</span>
+        </h1>
+        <p class="hero-desc">Movement that matters — powered by AI-driven clause extraction, risk intelligence, and human-approved workflows for the future of enterprise legal operations.</p>
+        <div class="hero-actions">
+          <a href="#login-section" class="btn btn-accent btn-lg">Explore Platform</a>
+          <a href="#entities" class="btn btn-outline-light btn-lg">Our Entities</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-indicators">
+      <button class="hero-dot active" data-slide="0"></button>
+      <button class="hero-dot" data-slide="1"></button>
+      <button class="hero-dot" data-slide="2"></button>
+    </div>
+    <div class="hero-progress"><div class="hero-progress-fill" id="hero-progress-fill"></div></div>
+    <div class="hero-scroll">
+      <span>Scroll to explore</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </div>
+  </section>
+
+  <!-- ENTITY GRID -->
+  <section class="section section-entities" id="entities">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Our Businesses</span>
+        <h2 class="section-title">Powering India's Mobility Ecosystem</h2>
+        <p class="section-desc">Four strategic pillars driving growth, sustainability, and innovation across global markets.</p>
+      </div>
+      <div class="entity-grid">
+        <article class="entity-card" data-tilt>
+          <div class="entity-img" style="background: linear-gradient(135deg, #1E3A5F, #0066CC);">
+            <div class="entity-icon">&#9651;</div>
+          </div>
+          <div class="entity-body">
+            <span class="entity-tag">Commercial Vehicles</span>
+            <h3 class="entity-name">Tata Motors Commercial</h3>
+            <p class="entity-desc">India's largest commercial vehicle manufacturer — trucks, buses, and defence vehicles powering logistics and infrastructure.</p>
+            <a href="#" class="entity-link">Visit Website <span>&rarr;</span></a>
+          </div>
+        </article>
+        <article class="entity-card" data-tilt>
+          <div class="entity-img" style="background: linear-gradient(135deg, #0F2847, #1D4ED8);">
+            <div class="entity-icon">&#9671;</div>
+          </div>
+          <div class="entity-body">
+            <span class="entity-tag">Passenger Vehicles</span>
+            <h3 class="entity-name">Tata Motors Passenger</h3>
+            <p class="entity-desc">Redefining personal mobility with Nexon, Harrier, Safari — blending safety, design, and connected technology.</p>
+            <a href="#" class="entity-link">Visit Website <span>&rarr;</span></a>
+          </div>
+        </article>
+        <article class="entity-card" data-tilt>
+          <div class="entity-img" style="background: linear-gradient(135deg, #064E3B, #0D9488);">
+            <div class="entity-icon">&#9889;</div>
+          </div>
+          <div class="entity-body">
+            <span class="entity-tag">Electric Mobility</span>
+            <h3 class="entity-name">Tata EV</h3>
+            <p class="entity-desc">India's leading EV brand — driving the transition to zero-emission mobility with Nexon EV, Tiago EV, and Charge Zone network.</p>
+            <a href="#" class="entity-link">Visit Website <span>&rarr;</span></a>
+          </div>
+        </article>
+        <article class="entity-card" data-tilt>
+          <div class="entity-img" style="background: linear-gradient(135deg, #1E1B4B, #4338CA);">
+            <div class="entity-icon">&#9733;</div>
+          </div>
+          <div class="entity-body">
+            <span class="entity-tag">Luxury Segment</span>
+            <h3 class="entity-name">Jaguar Land Rover</h3>
+            <p class="entity-desc">Global luxury automotive brand — Range Rover, Defender, Jaguar — combining British craftsmanship with future-ready technology.</p>
+            <a href="#" class="entity-link">Visit Website <span>&rarr;</span></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- INNOVATION SECTION -->
+  <section class="section section-innovation" id="innovation">
+    <div class="container">
+      <div class="innovation-layout">
+        <div class="innovation-left">
+          <span class="section-tag">Innovation &amp; Technology</span>
+          <h2 class="section-title">Building the Future of <span class="text-accent">Legal Intelligence</span></h2>
+          <p class="section-desc" style="margin-bottom:28px;">Our AI-powered platform combines cutting-edge technology with human expertise to transform how enterprises manage legal risk.</p>
+          <div class="innovation-tabs" id="innovation-tabs">
+            <button class="inno-tab active" data-tab="0">
+              <span class="inno-tab-icon">&#9881;</span>
+              <div><strong>AI &amp; Machine Learning</strong><br><small>Clause extraction, risk scoring, and pattern recognition across 40+ legal taxonomies.</small></div>
+            </button>
+            <button class="inno-tab" data-tab="1">
+              <span class="inno-tab-icon">&#128269;</span>
+              <div><strong>RAG &amp; Document Intelligence</strong><br><small>Retrieval-augmented generation for context-aware legal analysis and policy matching.</small></div>
+            </button>
+            <button class="inno-tab" data-tab="2">
+              <span class="inno-tab-icon">&#9878;</span>
+              <div><strong>Risk Reasoning Engine</strong><br><small>Multi-factor risk assessment with severity scoring and automated escalation workflows.</small></div>
+            </button>
+            <button class="inno-tab" data-tab="3">
+              <span class="inno-tab-icon">&#128737;</span>
+              <div><strong>Security &amp; Compliance</strong><br><small>Enterprise-grade encryption, audit trails, and RBAC — built for regulated industries.</small></div>
+            </button>
+          </div>
+        </div>
+        <div class="innovation-right">
+          <div class="inno-display" id="inno-display">
+            <div class="inno-display-card active" data-panel="0">
+              <div class="inno-display-icon">&#129302;</div>
+              <h3>AI Clause Engine</h3>
+              <p>40+ pattern rules with real-time extraction from PDFs, DOCX, and scanned images using multi-engine OCR.</p>
+              <div class="inno-stats">
+                <div class="inno-stat"><span class="inno-stat-val">40+</span><span class="inno-stat-lbl">Risk Patterns</span></div>
+                <div class="inno-stat"><span class="inno-stat-val">98%</span><span class="inno-stat-lbl">Accuracy</span></div>
+                <div class="inno-stat"><span class="inno-stat-val">&lt;3s</span><span class="inno-stat-lbl">Analysis</span></div>
+              </div>
+            </div>
+            <div class="inno-display-card" data-panel="1">
+              <div class="inno-display-icon">&#128300;</div>
+              <h3>RAG Knowledge Base</h3>
+              <p>Vector-indexed clause library with TF-IDF retrieval, policy reference matching, and semantic search.</p>
+              <div class="inno-stats">
+                <div class="inno-stat"><span class="inno-stat-val">24</span><span class="inno-stat-lbl">Knowledge Items</span></div>
+                <div class="inno-stat"><span class="inno-stat-val">4</span><span class="inno-stat-lbl">Policy Sources</span></div>
+                <div class="inno-stat"><span class="inno-stat-val">20</span><span class="inno-stat-lbl">Clause Templates</span></div>
+              </div>
+            </div>
+            <div class="inno-display-card" data-panel="2">
+              <div class="inno-display-icon">&#9888;</div>
+              <h3>Risk Intelligence</h3>
+              <p>Multi-severity risk flagging with rationale, evidence extraction, and automated review routing.</p>
+              <div class="inno-stats">
+                <div class="inno-stat"><span class="inno-stat-val">4</span><span class="inno-stat-lbl">Severity Levels</span></div>
+                <div class="inno-stat"><span class="inno-stat-val">Auto</span><span class="inno-stat-lbl">Routing</span></div>
+                <div class="inno-stat"><span class="inno-stat-val">100%</span><span class="inno-stat-lbl">Audit Trail</span></div>
+              </div>
+            </div>
+            <div class="inno-display-card" data-panel="3">
+              <div class="inno-display-icon">&#128274;</div>
+              <h3>Enterprise Security</h3>
+              <p>HMAC-signed tokens, SHA-256 hashing, RBAC, and complete audit logging for every system action.</p>
+              <div class="inno-stats">
+                <div class="inno-stat"><span class="inno-stat-val">HMAC</span><span class="inno-stat-lbl">Auth Tokens</span></div>
+                <div class="inno-stat"><span class="inno-stat-val">RBAC</span><span class="inno-stat-lbl">Access Control</span></div>
+                <div class="inno-stat"><span class="inno-stat-val">SHA</span><span class="inno-stat-lbl">Encryption</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUSTAINABILITY -->
+  <section class="section section-sustain" id="sustainability">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag tag-light">Sustainability</span>
+        <h2 class="section-title light">Committed to a <span class="text-accent">Net-Zero</span> Future</h2>
+        <p class="section-desc light">Driving responsible AI adoption with sustainable legal operations — reducing paper dependency through intelligent document processing.</p>
+      </div>
+      <div class="sustain-grid">
+        <div class="sustain-card">
+          <div class="sustain-val" data-count="100">0<span class="sustain-unit">%</span></div>
+          <div class="sustain-label">Digital Document Processing</div>
+          <div class="sustain-desc">Zero paper dependency in legal workflows</div>
+        </div>
+        <div class="sustain-card">
+          <div class="sustain-val" data-count="40">0<span class="sustain-unit">+</span></div>
+          <div class="sustain-label">Risk Taxonomy Rules</div>
+          <div class="sustain-desc">Automated compliance pattern matching</div>
+        </div>
+        <div class="sustain-card">
+          <div class="sustain-val" data-count="24">0</div>
+          <div class="sustain-label">Knowledge Base Items</div>
+          <div class="sustain-desc">Indexed clause templates &amp; policies</div>
+        </div>
+        <div class="sustain-card">
+          <div class="sustain-val" data-count="5">0</div>
+          <div class="sustain-label">Pipeline Stages</div>
+          <div class="sustain-desc">End-to-end document intelligence flow</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOGIN SECTION -->
+  <section class="section section-login" id="login-section">
+    <div class="container">
+      <div class="login-layout">
+        <div class="login-left">
+          <span class="section-tag">Secure Access</span>
+          <h2 class="section-title">Sign in to the <span class="text-accent">Intelligence Portal</span></h2>
+          <p class="section-desc">Access AI-powered legal document analysis, risk intelligence, and review workflows.</p>
+          <div class="login-features">
+            <div class="login-feature">
+              <div class="lf-icon">&#10003;</div>
+              <div><strong>AI-Powered Analysis</strong><p>Automated clause extraction and risk flagging</p></div>
+            </div>
+            <div class="login-feature">
+              <div class="lf-icon">&#10003;</div>
+              <div><strong>Human-in-the-Loop</strong><p>Review and approve before finalization</p></div>
+            </div>
+            <div class="login-feature">
+              <div class="lf-icon">&#10003;</div>
+              <div><strong>Full Audit Trail</strong><p>Every action logged and traceable</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="login-right">
+          <div class="login-card" id="login-card">
+            <div class="login-card-top">
+              <svg width="52" height="52" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="none" stroke="#0066CC" stroke-width="2"/><text x="50" y="40" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="14" font-weight="800" fill="#0066CC">TATA</text><text x="50" y="56" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="7" fill="#64748B">GROUP</text><text x="50" y="68" text-anchor="middle" font-family="Inter,sans-serif" font-size="5" fill="#475569">LEGAL AI</text></svg>
+              <h3>Portal Login</h3>
+              <p>Enter your credentials to continue</p>
+            </div>
+            <form id="login-form" class="login-form">
+              <label>Email Address</label>
+              <input type="email" id="login-email" value="admin@tata.com" required placeholder="admin@tata.com" />
+              <label>Password</label>
+              <input type="password" id="login-password" value="tata123" required placeholder="Enter password" />
+              <div id="login-error" class="form-error"></div>
+              <button type="submit" class="btn btn-accent btn-block">Sign In to Portal</button>
+            </form>
+            <p class="login-hint">Demo: admin@tata.com / tata123</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section section-about" id="about">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">About This System</span>
+        <h2 class="section-title">Enterprise Legal Intelligence Platform</h2>
+        <p class="section-desc">Built for Tata Group's legal operations — combining AI automation with human judgment for faster, smarter document review.</p>
+      </div>
+      <div class="about-grid">
+        <div class="about-card">
+          <div class="about-icon">&#9881;</div>
+          <h3>Multi-Format OCR</h3>
+          <p>Extract text from PDF, DOCX, TXT, images (PNG/JPG/TIFF/BMP/GIF/WEBP) using Tesseract, pdfplumber, and python-docx.</p>
+        </div>
+        <div class="about-card">
+          <div class="about-icon">&#128202;</div>
+          <h3>Clause Extraction</h3>
+          <p>20 approved clause templates with confidence scoring, section mapping, and page-level traceability.</p>
+        </div>
+        <div class="about-card">
+          <div class="about-icon">&#128680;</div>
+          <h3>Risk Flagging</h3>
+          <p>40-rule taxonomy with severity scoring, rationale, evidence extraction, and reviewer recommendations.</p>
+        </div>
+        <div class="about-card">
+          <div class="about-icon">&#128196;</div>
+          <h3>AI Summarization</h3>
+          <p>Executive summaries with approval workflow — approve, edit, escalate, or reject with full version history.</p>
+        </div>
+        <div class="about-card">
+          <div class="about-icon">&#128269;</div>
+          <h3>RAG Retrieval</h3>
+          <p>TF-IDF knowledge base with 24 indexed items, 4 policy references, and semantic clause matching.</p>
+        </div>
+        <div class="about-card">
+          <div class="about-icon">&#128221;</div>
+          <h3>Audit Logging</h3>
+          <p>Complete traceability of every upload, analysis, review action, and system event — immutable audit trail.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-subscribe">
+      <div class="container subscribe-inner">
+        <div>
+          <h3>Stay Updated</h3>
+          <p>Get the latest on Tata Group's AI-powered legal intelligence.</p>
+        </div>
+        <form class="subscribe-form" onsubmit="return false;">
+          <input type="email" placeholder="Enter your email address" class="input" />
+          <button type="submit" class="btn btn-accent">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>Platform</h4>
+          <a href="#login-section">Portal Login</a>
+          <a href="#entities">Our Businesses</a>
+          <a href="#innovation">Technology</a>
+          <a href="#sustainability">Sustainability</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+          <a href="#">Cookie Policy</a>
+          <a href="#">Accessibility</a>
+        </div>
+        <div class="footer-col">
+          <h4>Tata Group</h4>
+          <a href="#">About Tata Sons</a>
+          <a href="#">Investor Relations</a>
+          <a href="#">Sustainability Report</a>
+          <a href="#">Careers</a>
+        </div>
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <a href="#">Documentation</a>
+          <a href="#">API Reference</a>
+          <a href="#">Support</a>
+          <a href="#">System Status</a>
+        </div>
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <div class="footer-socials">
+            <a href="#" class="social-icon" aria-label="LinkedIn">in</a>
+            <a href="#" class="social-icon" aria-label="Twitter">X</a>
+            <a href="#" class="social-icon" aria-label="YouTube">&#9654;</a>
+            <a href="#" class="social-icon" aria-label="Instagram">&#9673;</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Tata Group. All rights reserved. An AI Legal Document Intelligence Platform.</span>
+        <span class="footer-bottom-links">
+          <a href="#">Sitemap</a>
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ============ APP SHELL (Dashboard + Feature Views) ============ -->
+<div id="app-shell" class="app-shell hidden">
+
+  <header class="app-header">
+    <div class="container app-header-inner">
+      <a href="#" class="brand" id="back-home">
+        <div class="brand-logo">
+          <svg width="36" height="36" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#0A1F3F" stroke="#0066CC" stroke-width="1"/><text x="50" y="40" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="14" font-weight="800" fill="#FFF">TATA</text><text x="50" y="56" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="7" fill="#CBD5E1">GROUP</text></svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name" style="color:#fff;">AI Legal Intelligence</span>
+        </div>
+      </a>
+      <nav class="app-nav" id="app-nav">
+        <button class="app-nav-tab active" data-view="dashboard"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg> Dashboard</button>
+        <button class="app-nav-tab" data-view="workspace"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> Workspace</button>
+        <button class="app-nav-tab" data-view="upload"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Upload</button>
+        <button class="app-nav-tab" data-view="processing"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg> Processing</button>
+        <button class="app-nav-tab" data-view="review"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> Review</button>
+        <button class="app-nav-tab" data-view="audit"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Audit</button>
+        <button class="app-nav-tab" data-view="settings"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg> Settings</button>
+      </nav>
+      <div class="app-header-right">
+        <div class="app-user">
+          <div class="app-user-avatar" id="app-user-avatar">TA</div>
+          <span class="app-user-name" id="app-user-name">--</span>
+        </div>
+        <button class="btn btn-ghost btn-sm" id="logout-btn" style="color:#CBD5E1;border-color:rgba(255,255,255,.15);">Sign Out</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="app-main">
+    <div class="container app-container">
+
+      <!-- WORKFLOW STEPPER (Processing -> Review -> Audit) -->
+      <div class="workflow-bar hidden" id="workflow-bar">
+        <div class="wf-steps" id="wf-steps">
+          <div class="wf-step" data-step="processing"><span class="wf-num">1</span><span class="wf-lbl">Processing</span></div>
+          <div class="wf-conn"></div>
+          <div class="wf-step" data-step="review"><span class="wf-num">2</span><span class="wf-lbl">Review</span></div>
+          <div class="wf-conn"></div>
+          <div class="wf-step" data-step="audit"><span class="wf-num">3</span><span class="wf-lbl">Audit</span></div>
+        </div>
+        <div class="wf-right">
+          <span class="wf-doc" id="wf-doc"></span>
+          <button class="btn btn-ghost btn-sm" id="wf-exit">Exit Flow</button>
+          <button class="btn btn-accent btn-sm" id="wf-next">Next &rsaquo;</button>
+        </div>
+      </div>
+
+      <!-- DASHBOARD -->
+      <section id="view-dashboard" class="app-view active">
+        <div class="app-page-head">
+          <div><h1 class="app-page-title">Dashboard Overview</h1><p class="app-page-desc">AI-powered risk intelligence and document analytics.</p></div>
+          <button class="btn btn-accent" data-nav="upload">+ Upload Document</button>
+        </div>
+        <div class="stat-grid" id="stat-grid"></div>
+        <div class="app-alert" id="alert-card">
+          <div class="alert-icon-w">&#9888;</div>
+          <div class="alert-body"><h3 id="alert-title">0 high-risk flags</h3><p id="alert-desc">Documents requiring legal review.</p></div>
+          <button class="btn btn-danger btn-sm" data-nav="review">Review Now</button>
+        </div>
+        <div class="grid-2">
+          <div class="card"><div class="card-head"><h3>Processing Pipeline</h3><span class="badge badge-blue">Live</span></div><div class="card-pad" id="pipe-stats"></div><div class="progress-bar" id="pipe-bar"></div></div>
+          <div class="card"><div class="card-head"><h3>Risk Analysis</h3></div><div class="card-pad" id="risk-matrix"></div></div>
+        </div>
+        <div class="card"><div class="card-head"><h3>Recent Documents</h3><button class="btn btn-ghost btn-sm" data-nav="workspace">View All &rsaquo;</button></div><div class="card-pad table-wrap"><table class="table" id="recent-table"></table></div></div>
+      </section>
+
+      <!-- WORKSPACE -->
+      <section id="view-workspace" class="app-view">
+        <div class="app-page-head"><div><h1 class="app-page-title">Document Workspace</h1><p class="app-page-desc">Search and manage all uploaded legal documents.</p></div><span class="badge badge-blue" id="ws-count">0 RECORDS</span></div>
+        <div class="card"><div class="card-pad">
+          <div class="filter-row">
+            <input type="text" id="filter-search" class="input" placeholder="Search by name, type, owner..." />
+            <select id="filter-status" class="input"><option value="All">Status: All</option><option>Completed</option><option>Processing</option><option>Under Review</option></select>
+            <select id="filter-risk" class="input"><option value="All">Risk: All</option><option value="High">High</option><option value="Medium">Medium</option><option value="Low">Low</option></select>
+          </div>
+          <div class="table-wrap"><table class="table" id="workspace-table"></table></div>
+        </div></div>
+      </section>
+
+      <!-- UPLOAD -->
+      <section id="view-upload" class="app-view">
+        <div class="app-page-head"><div><h1 class="app-page-title">Upload Document</h1><p class="app-page-desc">Submit a legal document for AI-powered analysis.</p></div></div>
+        <div class="card"><div class="card-pad">
+          <div class="upload-layout">
+            <div class="dropzone" id="dropzone">
+              <input type="file" id="file-input" hidden accept=".pdf,.docx,.doc,.txt,.md,.html,.htm,.csv,.json,.png,.jpg,.jpeg,.bmp,.tiff,.tif,.gif,.webp" />
+              <div class="dz-icon-w">&#8679;</div>
+              <h3 class="dz-title">Drag &amp; Drop Your Document</h3>
+              <p class="dz-sub">or <span class="dz-browse">click to browse</span></p>
+              <p class="dz-formats">PDF, DOCX, TXT, MD, HTML, CSV, JSON, PNG, JPG, TIFF — Max 25 MB</p>
+              <div class="dz-file" id="dz-file"></div>
+            </div>
+            <div class="form-side">
+              <h3 class="form-section-title">Document Metadata</h3>
+              <label>Document Type</label>
+              <select id="up-doc-type" class="input"><option>Contract</option><option>Vendor Agreement</option><option>Master Services Agreement</option><option>NDA</option><option>Service Agreement</option><option>Policy Document</option><option>Employment Contract</option></select>
+              <label>Business Unit</label><input type="text" id="up-bu" class="input" value="Corporate" />
+              <label>Counterparty</label><input type="text" id="up-party" class="input" placeholder="e.g. NovaCloud Inc." />
+              <label>Jurisdiction</label><input type="text" id="up-jur" class="input" placeholder="e.g. India" />
+              <label>Confidentiality</label>
+              <select id="up-conf" class="input"><option>Confidential</option><option>Internal</option><option>Restricted</option><option>Public</option></select>
+              <label>Review Priority</label>
+              <select id="up-prio" class="input"><option>Normal</option><option>High</option><option>Critical</option><option>Routine</option></select>
+              <button class="btn btn-accent btn-block" id="upload-btn">Upload &amp; Process</button>
+              <div id="upload-status" class="form-msg"></div>
+            </div>
+          </div>
+        </div></div>
+      </section>
+
+      <!-- PROCESSING -->
+      <section id="view-processing" class="app-view">
+        <div class="app-page-head"><div><h1 class="app-page-title">Processing Monitor</h1><p class="app-page-desc">Track document analysis pipeline status.</p></div><span class="badge" id="proc-tag">IDLE</span></div>
+        <div id="proc-queue" class="proc-queue"></div>
+        <div class="card" id="proc-detail-card"><div class="card-head"><h3>Pipeline Stages</h3></div><div class="card-pad" id="proc-detail"></div></div>
+      </section>
+
+      <!-- REVIEW -->
+      <section id="view-review" class="app-view">
+        <div class="app-page-head"><div><h1 class="app-page-title">Review &amp; Risk Analysis</h1><p class="app-page-desc">Review AI-generated summaries, clauses, and risk flags.</p></div></div>
+        <div id="review-doc-select" class="card"><div class="card-pad"></div></div>
+        <div id="review-summary" class="card hidden"><div class="card-head"><h3>AI Summary</h3><span class="badge" id="sum-approval">PENDING</span></div><div class="card-pad"><pre class="summary-text" id="sum-content"></pre></div><div class="card-foot" id="review-actions"></div></div>
+        <div id="review-clauses" class="card hidden"><div class="card-head"><h3>Extracted Clauses</h3><span class="badge badge-blue">OCR &rarr; Extract</span></div><div class="card-pad clause-list" id="clause-list"></div></div>
+        <div id="review-risks" class="card hidden"><div class="card-head"><h3>Risk Flags</h3><span class="badge badge-red">Reasoning Engine</span></div><div class="card-pad risk-list" id="risk-list"></div></div>
+      </section>
+
+      <!-- AUDIT -->
+      <section id="view-audit" class="app-view">
+        <div class="app-page-head"><div><h1 class="app-page-title">Audit History</h1><p class="app-page-desc">Complete trace of all system and reviewer actions.</p></div><span class="badge badge-blue">Traceable</span></div>
+        <div class="card"><div class="card-pad table-wrap"><table class="table" id="audit-table"></table></div></div>
+      </section>
+
+      <!-- SETTINGS -->
+      <section id="view-settings" class="app-view">
+        <div class="app-page-head"><div><h1 class="app-page-title">System Settings</h1></div></div>
+        <div class="card"><div class="card-pad">
+          <form id="settings-form" class="form-max">
+            <label>AI Mode</label>
+            <select id="st-mode" class="input"><option value="auto">Auto (Gemini if key present, else offline)</option><option value="gemini">Gemini API only</option><option value="offline">Offline Rule Engine</option></select>
+            <label>LLM Model</label><input type="text" id="st-model" class="input" placeholder="gemini-1.5-flash" />
+            <label>Auto Review Routing</label>
+            <select id="st-routing" class="input"><option value="high_risk">Route High/Critical to senior counsel</option><option value="all_risks">Route all risks</option><option value="none">No auto routing</option></select>
+            <button class="btn btn-accent" id="st-save" style="margin-top:16px;">Apply Settings</button>
+            <div id="st-status" class="form-msg"></div>
+          </form>
+        </div></div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="app-footer">
+    <div class="container"><span>&copy; 2026 Tata Group — AI Legal Document Intelligence System</span></div>
+  </footer>
+</div>
+
+<div class="toast-wrap" id="toast-wrap"></div>
+<script src="/static/js/app.js?v=2.0.2"></script>
 </body>
 </html>

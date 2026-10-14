@@ -1,6 +1,5 @@
 from pathlib import Path
 
-import fitz
 import json
 import sys
 from pathlib import Path

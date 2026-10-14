@@ -1,102 +1,214 @@
 import io
 import logging
+import re
 from pathlib import Path
-
-from backend.config import settings
 
 logger = logging.getLogger("ocr")
 
+SUPPORTED = {
+    "text": {".txt", ".md", ".html", ".htm", ".xml", ".csv", ".json", ".log", ".py", ".js", ".yaml", ".yml"},
+    "pdf": {".pdf"},
+    "docx": {".docx", ".doc"},
+    "image": {".png", ".jpg", ".jpeg", ".bmp", ".tiff", ".tif", ".gif", ".webp"},
+}
+
 
 def extract_text(file_path: str, ext: str) -> dict:
-    ext = ext.lower()
+    ext = ext.lower().strip()
     try:
-        if ext == ".pdf":
-            return _pdf_text(file_path)
-        if ext in (".docx", ".doc"):
-            return _docx_text(file_path)
-        if ext in (".png", ".jpg", ".jpeg"):
-            return _image_ocr(file_path)
-        if ext in (".txt", ".md", ".html"):
-            content = Path(file_path).read_text(errors="replace")
-            return {"text": content, "pages": 1, "confidence": 100.0, "engine": "plaintext", "warnings": []}
+        if ext in SUPPORTED["text"]:
+            return _read_text_file(file_path)
+        if ext in SUPPORTED["pdf"]:
+            return _extract_pdf(file_path)
+        if ext in SUPPORTED["docx"]:
+            return _extract_docx(file_path)
+        if ext in SUPPORTED["image"]:
+            return _extract_image(file_path)
     except Exception as exc:
-        logger.warning("Text extraction failed for %s: %s", file_path, exc)
-        return {"text": "", "pages": 0, "confidence": 0.0, "engine": "failed", "warnings": [str(exc)]}
-    return {"text": "", "pages": 0, "confidence": 0.0, "engine": "unsupported", "warnings": ["unsupported format"]}
+        logger.warning("Extraction failed for %s: %s", file_path, exc)
+        return _fail(f"Extraction failed: {exc}")
+    return _fail(f"Unsupported file type: {ext}")
 
 
-def _pdf_text(file_path: str) -> dict:
+def _read_text_file(file_path: str) -> dict:
+    content = ""
+    for enc in ("utf-8", "latin-1", "cp1252", "ascii"):
+        try:
+            content = Path(file_path).read_text(encoding=enc)
+            break
+        except (UnicodeDecodeError, UnicodeError):
+            continue
+    cleaned = _strip_html_tags(content) if _looks_html(content) else content
+    word_count = len(cleaned.split())
+    return {
+        "text": cleaned,
+        "pages": 1,
+        "confidence": 95.0 if word_count > 50 else 70.0,
+        "engine": "plaintext",
+        "warnings": [] if word_count > 50 else ["Very short document"],
+    }
+
+
+def _looks_html(text: str) -> bool:
+    sample = text[:500].strip()
+    return bool(re.search(r"<(html|body|div|p|table|head)\b", sample, re.IGNORECASE))
+
+
+def _strip_html_tags(html: str) -> str:
+    text = re.sub(r"<style[^>]*>.*?</style>", "", html, flags=re.DOTALL | re.IGNORECASE)
+    text = re.sub(r"<script[^>]*>.*?</script>", "", text, flags=re.DOTALL | re.IGNORECASE)
+    text = re.sub(r"<[^>]+>", " ", text)
+    text = re.sub(r"&nbsp;", " ", text)
+    text = re.sub(r"&[a-z]+;", " ", text)
+    return " ".join(text.split())
+
+
+def _extract_pdf(file_path: str) -> dict:
+    result = _pdfplumber_extract(file_path)
+    if result["text"].strip():
+        return result
+    ocr_result = _ocr_pdf_pages(file_path)
+    if ocr_result["text"].strip():
+        return ocr_result
+    return _fail("PDF contained no readable text")
+
+
+def _pdfplumber_extract(file_path: str) -> dict:
     try:
-        import fitz
+        import pdfplumber
     except ImportError:
-        return {"text": "", "pages": 0, "confidence": 0.0, "engine": "missing-pymupdf",
-                "warnings": ["pip install pymupdf for PDF support"]}
-    doc = fitz.open(file_path)
-    pages = []
+        return _fail("pdfplumber not installed: pip install pdfplumber")
+
+    pages_text = []
     confidences = []
-    for page in doc:
-        txt = page.get_text().strip()
-        pages.append(txt)
-        confidences.append(100.0 if txt else 0.0)
-    full = "\n\n".join(pages)
+    tables_found = 0
+    try:
+        with pdfplumber.open(file_path) as pdf:
+            for page in pdf.pages:
+                txt = (page.extract_text() or "").strip()
+                pages_text.append(txt)
+                confidences.append(95.0 if txt else 0.0)
+                tables = page.extract_tables()
+                if tables:
+                    tables_found += len(tables)
+                    for table in tables:
+                        for row in table:
+                            cells = [str(c).strip() for c in row if c]
+                            if cells:
+                                pages_text.append(" | ".join(cells))
+    except Exception as exc:
+        logger.warning("pdfplumber failed: %s", exc)
+        return _fail(f"pdfplumber error: {exc}")
+
+    full = "\n\n".join(p for p in pages_text if p)
     avg_conf = sum(confidences) / len(confidences) if confidences else 0
     warnings = []
+    if tables_found:
+        warnings.append(f"{tables_found} table(s) extracted")
     if avg_conf < 60:
-        warnings.append("Low text-layer confidence - scanned PDF likely, consider OCR")
-    if not full.strip():
-        ocr = _image_ocr_pdf(doc)
-        if ocr["text"]:
-            return ocr
-    return {"text": full, "pages": len(pages), "confidence": round(avg_conf, 1), "engine": "pymupdf", "warnings": warnings}
+        warnings.append("Low text confidence - may be scanned PDF")
+    return {
+        "text": full,
+        "pages": len(pages_text),
+        "confidence": round(avg_conf, 1),
+        "engine": "pdfplumber",
+        "warnings": warnings,
+    }
 
 
-def _image_ocr_pdf(doc):
-    text = []
+def _ocr_pdf_pages(file_path: str) -> dict:
+    try:
+        from PIL import Image
+    except ImportError:
+        return _fail("Pillow not installed for image OCR")
+    try:
+        import pdfplumber
+    except ImportError:
+        return _fail("pdfplumber not installed")
+
+    pages = []
     confs = []
-    for page in doc:
-        pix = page.get_pixmap(dpi=200)
-        img_bytes = pix.tobytes("png")
-        res = _tesseract_ocr(img_bytes)
-        text.append(res["text"])
-        confs.append(res["confidence"])
+    try:
+        with pdfplumber.open(file_path) as pdf:
+            for i, page in enumerate(pdf.pages[:20]):
+                img = page.to_image(resolution=200)
+                buf = io.BytesIO()
+                img.save(buf, format="PNG")
+                buf.seek(0)
+                pil_img = Image.open(buf)
+                ocr_result = _tesseract_ocr_pil(pil_img)
+                pages.append(ocr_result["text"])
+                confs.append(ocr_result["confidence"])
+    except Exception as exc:
+        logger.warning("OCR PDF failed: %s", exc)
+        return _fail(f"OCR PDF error: {exc}")
+
+    full = "\n\n".join(p for p in pages if p)
     avg = sum(confs) / len(confs) if confs else 0
-    return {"text": "\n\n".join(text), "pages": len(text), "confidence": round(avg, 1), "engine": "tesseract",
-            "warnings": []}
+    return {"text": full, "pages": len(pages), "confidence": round(avg, 1),
+            "engine": "pdfplumber+tesseract", "warnings": []}
 
 
-def _docx_text(file_path: str) -> dict:
+def _extract_docx(file_path: str) -> dict:
     try:
         import docx
     except ImportError:
-        return {"text": "", "pages": 0, "confidence": 0.0, "engine": "missing-python-docx",
-                "warnings": ["pip install python-docx for DOCX support"]}
-    d = docx.Document(file_path)
-    paras = [p.text for p in d.paragraphs if p.text.strip()]
-    for table in d.tables:
+        return _fail("python-docx not installed: pip install python-docx")
+
+    doc = docx.Document(file_path)
+    parts = []
+    for p in doc.paragraphs:
+        if p.text.strip():
+            parts.append(p.text)
+    for table in doc.tables:
         for row in table.rows:
-            paras.append(" | ".join(cell.text for cell in row.cells))
-    return {"text": "\n".join(paras), "pages": 1, "confidence": 100.0, "engine": "python-docx", "warnings": []}
+            cells = [c.text.strip() for c in row.cells if c.text.strip()]
+            if cells:
+                parts.append(" | ".join(cells))
+    text = "\n".join(parts)
+    return {
+        "text": text,
+        "pages": 1,
+        "confidence": 90.0 if text.strip() else 0.0,
+        "engine": "python-docx",
+        "warnings": [] if text.strip() else ["No text content found in DOCX"],
+    }
 
 
-def _image_ocr(file_path: str) -> dict:
-    img_bytes = Path(file_path).read_bytes()
-    return _tesseract_ocr(img_bytes)
-
-
-def _tesseract_ocr(img_bytes: bytes) -> dict:
+def _extract_image(file_path: str) -> dict:
     try:
         from PIL import Image
+    except ImportError:
+        return _fail("Pillow not installed: pip install Pillow")
+
+    img = Image.open(file_path)
+    return _tesseract_ocr_pil(img)
+
+
+def _tesseract_ocr_pil(img) -> dict:
+    try:
         import pytesseract
     except ImportError:
-        return {"text": "", "pages": 1, "confidence": 0.0, "engine": "missing-tesseract",
-                "warnings": ["pip install pytesseract pillow and tesseract OCR binary"]}
+        return {"text": "[OCR requires pytesseract - pip install pytesseract + tesseract binary]",
+                "pages": 1, "confidence": 0.0, "engine": "pytesseract-missing",
+                "warnings": ["pytesseract not installed"]}
+
     try:
-        img = Image.open(io.BytesIO(img_bytes))
+        text = pytesseract.image_to_string(img)
         data = pytesseract.image_to_data(img, output_type=pytesseract.Output.DICT)
-        words = [w for w in data["text"] if w.strip()]
-        confs = [float(c) for c, w in zip(data["conf"], data["text"]) if w.strip()]
-        text = "\n".join(line for line in data["text"] if line.strip())
-        avg_conf = sum(confs) / len(confs) if confs else 0.0
-        return {"text": text, "pages": 1, "confidence": round(avg_conf, 1), "engine": "tesseract", "warnings": []}
+        confs = [float(c) for c, w in zip(data["conf"], data["text"]) if w.strip() and float(c) > 0]
+        avg = sum(confs) / len(confs) if confs else 0
+        return {
+            "text": text.strip(),
+            "pages": 1,
+            "confidence": round(avg, 1),
+            "engine": "tesseract",
+            "warnings": [],
+        }
     except Exception as exc:
-        return {"text": "", "pages": 1, "confidence": 0.0, "engine": "tesseract-error", "warnings": [str(exc)]}
+        return {"text": "", "pages": 1, "confidence": 0.0,
+                "engine": "tesseract-error", "warnings": [str(exc)]}
+
+
+def _fail(msg):
+    return {"text": "", "pages": 0, "confidence": 0.0, "engine": "failed", "warnings": [msg]}

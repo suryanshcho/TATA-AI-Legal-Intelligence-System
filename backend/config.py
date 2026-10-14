@@ -41,7 +41,7 @@ class Settings:
     MAX_UPLOAD_MB = int(os.getenv("MAX_UPLOAD_MB", "25"))
     ALLOWED_EXTENSIONS = {ext.strip() for ext in os.getenv(
         "ALLOWED_EXTENSIONS",
-        ".pdf,.docx,.doc,.txt,.md,.html,.png,.jpg,.jpeg",
+        ".pdf,.docx,.doc,.txt,.md,.html,.htm,.xml,.csv,.json,.png,.jpg,.jpeg,.bmp,.tiff,.tif,.gif,.webp",
     ).split(",") if ext.strip()}
 
     OCR_ENGINE = os.getenv("OCR_ENGINE", "auto")
