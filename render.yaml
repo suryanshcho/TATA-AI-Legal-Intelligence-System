@@ -12,7 +12,7 @@ services:
       - key: AI_MODE
         value: offline
       - key: GEMINI_API_KEY
-        sync: false
+        value: ""
       - key: SECRET_KEY
         generateValue: true
       - key: ADMIN_EMAIL
